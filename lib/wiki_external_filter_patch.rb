@@ -1,7 +1,5 @@
 require 'digest/md5'
 
-
-
 module ApplicationHelper
   MACROS_RE = /
     (!)?                        # escaping
@@ -15,11 +13,10 @@ end
 
 module Redmine
   module WikiFormatting
-
     class << self
-    include ApplicationHelper
+      include ApplicationHelper
       def to_html_with_external_filter(format, text, options={})
-        text, macros_grabbed = preprocess_macros(text)
+        text, @@macros_grabbed = preprocess_macros(text)
         to_html_without_external_filter(format, text, options)
       end
 
@@ -41,6 +38,13 @@ module Redmine
 
       alias_method_chain :to_html, :external_filter
     end
+
   end
 end
 
+module Redmine::WikiFormatting::Macros::Definitions
+  def exec_macro_with_macros_grabbed(name, obj, args)
+    exec_macro_without_macros_grabbed(name, obj, args)
+  end
+  alias_method_chain :exec_macro, :macros_grabbed
+end
