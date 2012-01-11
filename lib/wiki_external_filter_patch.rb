@@ -1,6 +1,8 @@
 require 'digest/md5'
 
-module ApplicationHelper
+module Redmine
+  module WikiFormatting
+
   MACROS_RE = /
     (!)?                        # escaping
     (\{\{                        # opening tag
@@ -9,12 +11,12 @@ module ApplicationHelper
     \}\}                        # closing tag
     )
   /xm unless const_defined?(:MACROS_RE)
-end
 
-module Redmine
-  module WikiFormatting
+
     class << self
-      include ApplicationHelper
+
+
+
       def to_html_with_external_filter(format, text, options={})
         text, @@macros_grabbed = preprocess_macros(text)
         to_html_without_external_filter(format, text, options)
@@ -44,6 +46,16 @@ end
 
 module Redmine::WikiFormatting::Macros::Definitions
   def exec_macro_with_macros_grabbed(name, obj, args)
+    logger.debug "MACRO EXEC: [name: #{name}, :args: #{args}]"
+    if name =~ /_macros_grabbed/
+      name = 'graphviz'
+      args =<<-EOS
+digraph{
+ hoge -> fuga;
+ }
+      EOS
+    end
+    logger.debug "MACRO EXEC: [name: #{name}, :args: #{args}]"
     exec_macro_without_macros_grabbed(name, obj, args)
   end
   alias_method_chain :exec_macro, :macros_grabbed
