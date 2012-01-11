@@ -12,10 +12,7 @@ module Redmine
     )
   /xm unless const_defined?(:MACROS_RE)
 
-
     class << self
-
-
 
       def to_html_with_external_filter(format, text, options={})
         text, @@macros_grabbed = preprocess_macros(text)
@@ -27,9 +24,8 @@ module Redmine
         text = text.gsub(MACROS_RE) do |s|
           esc, all, macro = $1, $2, $3.downcase
           if esc.nil? and (WikiExternalFilterHelper.has_macro macro rescue false)
-            args = $5
-            key = Digest::MD5.hexdigest("#{macro}:#{args}")
-            macros_grabbed[key] = {:macro => macro, :args => args}
+            args = $5.chomp
+            key = ["#{macro}:#{args}"].pack('m').gsub(/\n/,'')
             "{{_macros_grabbed(#{key})}}"
           else
             s
@@ -46,16 +42,10 @@ end
 
 module Redmine::WikiFormatting::Macros::Definitions
   def exec_macro_with_macros_grabbed(name, obj, args)
-    logger.debug "MACRO EXEC: [name: #{name}, :args: #{args}]"
     if name =~ /_macros_grabbed/
-      name = 'graphviz'
-      args =<<-EOS
-digraph{
- hoge -> fuga;
- }
-      EOS
+      args[0].unpack('m')[0] =~ /([^:]+):(.*)/m
+      name,args = [$1,$2]
     end
-    logger.debug "MACRO EXEC: [name: #{name}, :args: #{args}]"
     exec_macro_without_macros_grabbed(name, obj, args)
   end
   alias_method_chain :exec_macro, :macros_grabbed
