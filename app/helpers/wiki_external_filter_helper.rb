@@ -93,9 +93,9 @@ module WikiExternalFilterHelper
       c = nil
       e = nil
 
-      text = text.
-          gsub(/<br\s\/>/, "\n").
-          gsub(/<\/?strong>/, "*")
+      text.
+          gsub!(/<br\s\/>/, "\n").
+          gsub!(/<\/?strong>/, "*")
 
       # If popen4 is available - use it as it provides stderr
       # redirection so we can get more info in the case of error.
