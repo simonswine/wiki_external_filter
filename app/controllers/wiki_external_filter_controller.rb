@@ -1,5 +1,6 @@
 
 class WikiExternalFilterController < ApplicationController
+  unloadable
 
   include WikiExternalFilterHelper
 
