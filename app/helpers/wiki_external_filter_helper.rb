@@ -4,11 +4,10 @@ module WikiExternalFilterHelper
 
   def load_config
     unless @config
-      config_file = "#{RAILS_ROOT}/config/wiki_external_filter.yml"
-      unless File.exists?(config_file)
-        raise "Config not found: #{config_file}"
+      unless File.exists?($wiki_external_filter_config)
+        raise "Config not found: #{$wiki_external_filter_config}"
       end
-      @config = YAML.load_file(config_file)[RAILS_ENV]
+      @config = YAML.load_file($wiki_external_filter_config)[RAILS_ENV]
     end
     @config
   end

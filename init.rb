@@ -1,6 +1,7 @@
 require 'redmine'
 
 RAILS_DEFAULT_LOGGER.info 'Starting wiki_external_filter plugin for Redmine'
+$wiki_external_filter_config = (File.dirname(__FILE__) + "/config/wiki_external_filter.yml")
 
 Redmine::Plugin.register :wiki_external_filter do
   name 'Wiki External Filter Plugin'
