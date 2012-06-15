@@ -1,0 +1,1 @@
+../app/helpers/wiki_external_filter_helper.rb
