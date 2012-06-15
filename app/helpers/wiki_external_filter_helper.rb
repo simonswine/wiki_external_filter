@@ -4,9 +4,9 @@ module WikiExternalFilterHelper
 
   def load_config
     unless @config
-      config_file = "#{RAILS_ROOT}/config/wiki_external_filter.yml"
+      config_file = File.join(RAILS_ROOT, 'config', 'wiki_external_filter.yml')
       unless File.exists?(config_file)
-        raise "Config not found: #{config_file}"
+        config_file = File.join(File.dirname(File.dirname(File.dirname(__FILE__))), 'config', 'wiki_external_filter.yml')
       end
       @config = YAML.load_file(config_file)[RAILS_ENV]
     end
@@ -92,6 +92,10 @@ module WikiExternalFilterHelper
 
       c = nil
       e = nil
+
+      text.
+          gsub!(/<br\s\/>/, "\n").
+          gsub!(/<\/?strong>/, "*")
 
       # If popen4 is available - use it as it provides stderr
       # redirection so we can get more info in the case of error.
