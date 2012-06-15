@@ -1,5 +1,7 @@
 require 'redmine'
 
+require 'wiki_external_filter_patch'
+
 RAILS_DEFAULT_LOGGER.info 'Starting wiki_external_filter plugin for Redmine'
 
 Redmine::Plugin.register :wiki_external_filter do
