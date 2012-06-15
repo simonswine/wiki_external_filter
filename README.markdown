@@ -27,13 +27,11 @@ Installation
 2. Get sources from [github](http://github.com/ndl/wiki_external_filter).
 3. See [Installing a plugin](http://www.redmine.org/wiki/redmine/Plugins) on
    Redmine site.
-4. Copy wiki_external_filter.yml from config folder of plugin
-   directory to the config folder of your redmine installation.
-5. After installation it's **strongly recommended** to go to plugin settings and
+4. After installation it's **strongly recommended** to go to plugin settings and
    configure caching: Administration -> Plugins -> Wiki External Filter Plugin: Configure and follow instructions. Note that RoR file-based caching suggested by default does
    not implement proper cache expiration: you should either setup a cron task to
    clean cache or do it manually from time to time.
-6. To successfully use macros with argument expressions, it's necessary
+5. To successfully use macros with argument expressions, it's necessary
    to patch wiki formatting routine so that it preserves macros arguments.
 
     **Redmine 1.0.2:** apply [this patch](http://www.ndl.kiev.ua/downloads/redmine-1.0.2-macros-escaping.patch) to the Redmine core and go to step 7, there's no need to patch individual wiki formatters anymore.
@@ -53,7 +51,7 @@ Installation
 
     [Preliminary version of patch](http://www.redmine.org/boards/3/topics/10649#message-15222) for Textile support was made available by Yuya Nishihara, according to the author "It works but really messy" but I haven't tested it so cannot comment on it.
 
-7. To allow passing attachments names as macros arguments Redmine core should be patched accordingly: here's [the patch for Redmine 1.0.2](http://www.ndl.kiev.ua/downloads/redmine-1.0.2-attachments.patch) and here is [the patch for Redmine 0.9.x](http://www.ndl.kiev.ua/downloads/redmine-attachments-in-macros.patch.gz).
+6. To allow passing attachments names as macros arguments Redmine core should be patched accordingly: here's [the patch for Redmine 1.0.2](http://www.ndl.kiev.ua/downloads/redmine-1.0.2-attachments.patch) and here is [the patch for Redmine 0.9.x](http://www.ndl.kiev.ua/downloads/redmine-attachments-in-macros.patch.gz).
 
 Specific filters installation instructions are below.
 
