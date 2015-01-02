@@ -1,9 +1,10 @@
 require 'redmine'
 
-require 'wiki_external_filter_patch'
+#require 'wiki_external_filter_patch'
 #require 'wiki_external_filter_helper'
 
-RAILS_DEFAULT_LOGGER.info 'Starting wiki_external_filter plugin for Redmine'
+Rails.logger.info 'Starting wiki_external_filter plugin for Redmine'
+
 $wiki_external_filter_config = (File.dirname(__FILE__) + "/config/wiki_external_filter.yml")
 
 Redmine::Plugin.register :wiki_external_filter do
@@ -15,10 +16,11 @@ Redmine::Plugin.register :wiki_external_filter do
   settings :default => {'cache_seconds' => '0'}, :partial => 'wiki_external_filter/settings'
 
   config = WikiExternalFilterHelper.load_config
-  RAILS_DEFAULT_LOGGER.debug "Config: #{config.inspect}"
+  Rails.logger.debug "Config: #{config.inspect}"
 
-  config.keys.each do |name|
-    RAILS_DEFAULT_LOGGER.info "Registering #{name} macro with wiki_external_filter"
+  if config
+   config.keys.each do |name|
+    Rails.logger.info "Registering #{name} macro with wiki_external_filter"
     Redmine::WikiFormatting::Macros.register do
       info = config[name]
       desc info['description']
@@ -43,5 +45,6 @@ Redmine::Plugin.register :wiki_external_filter do
       end
     end
   end
+ end
 
 end

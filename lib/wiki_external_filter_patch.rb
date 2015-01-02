@@ -41,12 +41,12 @@ module Redmine
 end
 
 module Redmine::WikiFormatting::Macros::Definitions
-  def exec_macro_with_macros_grabbed(name, obj, args)
+  def exec_macro_with_macros_grabbed(name, obj, args, text)
     if name =~ /_macros_grabbed/
       args[0].unpack('m')[0] =~ /([^:]+):(.*)/m
       name,args = [$1,$2]
     end
-    exec_macro_without_macros_grabbed(name, obj, args)
+    exec_macro_without_macros_grabbed(name, obj, args, text)
   end
   alias_method_chain :exec_macro, :macros_grabbed
 end

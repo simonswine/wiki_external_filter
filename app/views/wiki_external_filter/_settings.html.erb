@@ -18,7 +18,7 @@
   </p>
   <p>
     Current cache settings are:<br/>
-      ActionController::Base.cache_configured? = <%= h ActionController::Base.cache_configured? ? "true" : "false" %><br/>
+      ActionController::Base.cache_configured? = <%# <%= h ActionController::Base.cache_configured? ? "true" : "false" %><br/>
       <% cache_store = ActionController::Base.respond_to?('fragment_cache_store=') ? ActionController::Base.fragment_cache_store : ActionController::Base.cache_store %>
       ActionController::Base.cache_store = <%= h cache_store.inspect %>
   </p>
