@@ -20,8 +20,8 @@ development: &development
     outputs:
       - command: "/usr/bin/dot -Tsvg"
         content_type: "image/svg+xml"
-      - command: "/usr/bin/dot -Tpng"
-        content_type: "image/png"
+     # - command: "/usr/bin/dot -Tpng"
+     #   content_type: "image/png"
   ritex:
     description: "Converts WebTeX expression to MathML, see http://ritex.rubyforge.org/"
     template: svg
