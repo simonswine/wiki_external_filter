@@ -5,8 +5,8 @@ development: &development
     outputs:
       - command: "plantuml -pipe"
         content_type: "image/png"
-        prolog: "@startuml"
-        epilog: "@enduml"
+        prolog: "@startuml\n"
+        epilog: "\n@enduml"
   latex:
     description: "Converts LaTeX to embedded image"
     template: image 
