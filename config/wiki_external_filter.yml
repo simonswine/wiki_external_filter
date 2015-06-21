@@ -1,32 +1,32 @@
 development: &development
-  #plantuml:
-  #  description: "Constructs UML diagram image from its textual description in PlantUML language, see http://plantuml.sourceforge.net"
-  #  template: image
-  #  outputs:
-  #    - command: "/usr/bin/plantuml -pipe"
-  #      content_type: "image/png"
-  #      prolog: "@startuml"
-  #      epilog: "@enduml"
+  plantuml:
+    description: "Constructs UML diagram image from its textual description in PlantUML language, see http://plantuml.sourceforge.net"
+    template: image
+    outputs:
+      - command: "plantuml -pipe"
+        content_type: "image/png"
+        prolog: "@startuml"
+        epilog: "@enduml"
   latex:
     description: "Converts LaTeX to embedded image"
     template: image 
     cache_seconds: 300
     outputs:
-      - command: "/usr/local/bin/latex2png inline"
+      - command: "latex2png inline"
         content_type: "image/png"
   graphviz:
     description: "Constructs graph image from its textual description in DOT language, see http://www.graphviz.org"
     template: svg
     outputs:
-      - command: "/usr/bin/dot -Tsvg"
+      - command: "dot -Tsvg"
         content_type: "image/svg+xml"
-     # - command: "/usr/bin/dot -Tpng"
+     # - command: "dot -Tpng"
      #   content_type: "image/png"
   ritex:
     description: "Converts WebTeX expression to MathML, see http://ritex.rubyforge.org/"
     template: svg
     outputs:
-      - command: "(echo '<!DOCTYPE math PUBLIC \"-//W3C//DTD MathML 2.0//EN\" \"http://www.w3.org/Math/DTD/mathml2/mathml2.dtd\">'; /usr/bin/ritex) | xmllint --noent --nonet --catalogs --loaddtd - | sed 's/^<!DOCTYPE.\\+$//' | /usr/bin/math2svg"
+      - command: "(echo '<!DOCTYPE math PUBLIC \"-//W3C//DTD MathML 2.0//EN\" \"http://www.w3.org/Math/DTD/mathml2/mathml2.dtd\">'; ritex) | xmllint --noent --nonet --catalogs --loaddtd - | sed 's/^<!DOCTYPE.\\+$//' | math2svg"
         content_type: "image/svg+xml"
   video:
     description: "Converts video file given by its filename to FLV and displays it via Flowplayer"
@@ -54,7 +54,7 @@ development: &development
     template: text
     cache_seconds: 10
     outputs:
-      - command: "/usr/bin/fortune"
+      - command: "fortune"
         content_type: "text/plain"
 
 test:
