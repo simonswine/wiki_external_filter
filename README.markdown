@@ -75,7 +75,7 @@ PlantUML but so far looks like it's still unusable.
 
 Example of usage:
 
-    {{plantuml(
+    {{plantuml
     Alice -> Bob: Authentication Request
     alt successful case
       Bob -> Alice: Authentication Accepted
@@ -89,7 +89,7 @@ Example of usage:
     else Another type of failure
       Bob -> Alice: Please repeat
     end
-    )}}
+    }}
 
 Rendered output:
 
@@ -104,7 +104,7 @@ Result is rendered as SVG image or PNG fallback if SVG is not supported by your 
 
 Example of usage:
 
-    {{graphviz(
+    {{graphviz
     digraph finite_state_machine {
         rankdir=LR;
         size="8,5"
@@ -125,7 +125,7 @@ Example of usage:
         LR_8 -> LR_6 [ label = "S(b)" ];
         LR_8 -> LR_5 [ label = "S(a)" ];
     }
-    )}}
+    }}
 
 Rendered output:
 
@@ -146,9 +146,9 @@ Gentoo ebuilds for [ritex](http://www.ndl.kiev.ua/downloads/ritex-0.3.ebuild.tar
 
 Example of usage:
 
-    {{ritex(
+    {{ritex
     G(y) = \left\{\array{ 1 - e^{-\lambda x} & \text{ if } y \geq 0 \\ 0 & \text{ if } y < 0 }\right.
-    )}}
+    }}
 
 Rendered output:
 
@@ -171,15 +171,21 @@ Required packages installed:
 
 Example of usage:
 
-    {{video(video_attachment_name.avi)}}
+    {{video
+	video_attachment_name.avi
+	}}
 
 or
 
-    {{video(/full/path/to/the/file/on/the/server/video.avi)}}
+    {{video
+	/full/path/to/the/file/on/the/server/video.avi
+	}}
 
 or
 
-    {{video_url(http://www.example.com/video.avi)}}
+    {{video_url
+	http://www.example.com/video.avi
+	}}
 
 Rendered output (before player is embedded by clicking on the image, using Flowplayer [video demo](http://flowplayer.org/demos/installation/index.html) file):
 
@@ -232,10 +238,8 @@ filter.
 Current bugs/issues
 ===================
 
-1. Either Redmine core (if you use default wiki engine) or your custom wiki engine plugin requires patching to get things work. In fact, the whole
-   wiki formatting design as of now seems to be quite messy.
-2. SVG support is more complex it should have been if all browsers had played by the rules - currently quite some trickery with different XHTML elements/CSS tricks is used to show SVGs properly in major browsers. Of course, there's not that much that can be done for IE as it does not support SVG at all, but now at least the plugin substitutes raster fall-back image for IE if it is available.
-3. For formula support, theoretically ritex alone is sufficient if you have
+1. SVG support is more complex it should have been if all browsers had played by the rules - currently quite some trickery with different XHTML elements/CSS tricks is used to show SVGs properly in major browsers. Of course, there's not that much that can be done for IE as it does not support SVG at all, but now at least the plugin substitutes raster fall-back image for IE if it is available.
+2. For formula support, theoretically ritex alone is sufficient if you have
    MathML-capable browser, however in practice there are too many issues with
    this approach: for example Firefox (actually the onlt MathML-capable
    browser so far, it seems) requires specific DOCTYPE additions that Redmine
@@ -245,10 +249,10 @@ Current bugs/issues
    required for XML output. Hence, the double conversion (WebTeX to MathML
    and then MathML to SVG) is necessary. Once (if ever?) MathML support
    matures in other browser, possibly this can be revisited.
-4. SVGs could have been embedded into HTML page directly (thus allowing to use
+3. SVGs could have been embedded into HTML page directly (thus allowing to use
    redmine links there) but I'm afraid there are similar problems
    as with MathML embedding attempts.
-5. RoR caching support is a mess: no way to expire old files from file-based
+4. RoR caching support is a mess: no way to expire old files from file-based
    cache??? Are you joking???
 
 Additional info

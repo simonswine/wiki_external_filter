@@ -112,7 +112,6 @@ module WikiExternalFilterHelper
         text.gsub!(/<br\s\/>/, "\n")
         text.gsub!(/<\/?strong>/, "*")
         text = CGI.unescapeHTML(text)
-        text = text[2,text.length()-4]
         text.gsub!('", "',",")
         text.gsub!("\\r","\r")
         text.gsub!("\\n","\n")

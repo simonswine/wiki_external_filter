@@ -24,9 +24,9 @@ Redmine::Plugin.register :wiki_external_filter do
     Redmine::WikiFormatting::Macros.register do
       info = config[name]
       desc info['description']
-      macro name do |obj, args|
-        m = WikiExternalFilterHelper::Macro.new(self, args.to_s, obj.respond_to?('page') ? obj.page.attachments : nil, name, info)
-	m.render
+      macro name do |obj, args, text|
+            m = WikiExternalFilterHelper::Macro.new(self, text, nil, name, info)
+            m.render
       end
 
       # code borrowed from wiki latex plugin
