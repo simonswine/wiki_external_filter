@@ -3,7 +3,7 @@ development: &development
     description: "Constructs UML diagram image from its textual description in PlantUML language, see http://plantuml.sourceforge.net"
     template: image
     outputs:
-      - command: "plantuml -pipe"
+      - command: "plantuml -pipe -charset UTF-8"
         content_type: "image/png"
         prolog: "@startuml\n"
         epilog: "\n@enduml"
